@@ -20,11 +20,10 @@ function useCountdown(targetSeconds: number) {
 const products = [
   {
     id: 'habit-tracker',
-    title: 'Habit Tracker for Excel & Google Sheets',
+    title: 'Habit Tracker for Google Sheets',
     image: '/image.png',
-    price: 0,
-    originalPrice: 2900,
-    currency: 'INR',
+    price: 13,
+    currency: 'USD',
     badge: 'Sale',
   },
 ];
@@ -92,10 +91,7 @@ export default function Product() {
                 </h2>
 
                 <p className="text-base font-bold text-gray-900">
-                  Rs. {product.price.toFixed(2)} {product.currency}
-                </p>
-                <p className="text-xs text-gray-400 line-through">
-                  Rs. {product.originalPrice.toFixed(2)} {product.currency}
+                  ${product.price.toFixed(2)} {product.currency}
                 </p>
               </div>
             </Link>
