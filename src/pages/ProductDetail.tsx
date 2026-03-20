@@ -76,7 +76,7 @@ const VIDEO_URL =
   'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/product-1-video.mp4';
 
 const CHECKOUT_URL =
-  'https://store.elamai.in/buy?s=1&qty%5Bw9Ko3%5D=1&cart_links%5B%5D=w9Ko3';
+  'https://checkout.elamai.in/buy?s=1&cart_links%5B%5D=w9Ko3&qty%5Bw9Ko3%5D=1';
 
 function SkeletonImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
   const [loaded, setLoaded] = useState(false);
