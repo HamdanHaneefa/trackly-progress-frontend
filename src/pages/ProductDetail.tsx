@@ -112,15 +112,12 @@ export default function ProductDetail() {
 
           {/* Left — Image Gallery */}
           <div className="lg:sticky lg:top-20">
-            <div className="relative rounded-2xl overflow-hidden bg-gray-100 w-full" style={{ aspectRatio: '1/1' }}>
-              {images[active].src ? (
-                <img src={images[active].src} alt="Trackly Habit Tracker" className="w-full h-full object-cover" />
-              ) : (
-                <div className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br ${images[active].bg}`}>
-                  <span className="text-white text-xl font-bold text-center px-6">{images[active].label}</span>
-                  <span className="text-white/50 text-xs mt-1 tracking-wide uppercase">Preview</span>
-                </div>
-              )}
+            <div className="relative rounded-2xl overflow-hidden bg-gray-950 w-full" style={{ aspectRatio: '4/3' }}>
+              <img
+                src={images[active].src}
+                alt="Trackly Habit Tracker"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div className="flex gap-2 mt-3">
               {images.map((img, i) => (
@@ -132,7 +129,7 @@ export default function ProductDetail() {
                   aria-label={`View ${i + 1}`}
                 >
                   {img.src
-                    ? <img src={img.src} alt="" className="w-full h-full object-cover" />
+                    ? <img src={img.src} alt="" className="w-full h-full object-contain bg-gray-950" />
                     : <div className={`w-full h-full bg-gradient-to-br ${img.bg} flex items-center justify-center`}>
                         <span className="text-white text-[9px] font-semibold text-center px-1 leading-tight">{img.label}</span>
                       </div>
@@ -210,7 +207,7 @@ export default function ProductDetail() {
                 },
                 {
                   label: 'How do I get access?',
-                  content: 'After checkout, your access link is sent to your email. Open it in any browser — no installation, no downloads. Works on phone and desktop.',
+                  content: 'After checkout, your access link is sent to your email. Open it in any browser — no installation, no downloads. When logging in, use the same email you entered at checkout.',
                 },
               ].map(({ label, content }, i) => (
                 <details key={i} className="group">
@@ -233,30 +230,39 @@ export default function ProductDetail() {
       </div>
 
       {/* ── What is Trackly? ── */}
-      <div className="bg-gray-50 py-16 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xs font-bold tracking-widest uppercase text-red-600 mb-3">What is Trackly?</p>
-          <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 leading-tight mb-5">
-            Most people know what they should do.<br className="hidden sm:block" /> They just don't track it.
-          </h2>
-          <p className="text-gray-500 text-sm sm:text-base leading-relaxed max-w-xl mx-auto mb-8">
-            Trackly is a web app that gives you a clear, simple system to track your habits daily, weekly, and monthly.
-            No spreadsheets. No paper. No app to download. Just open it in your browser and start.
-          </p>
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 text-left">
-            {[
-              { Icon: Calendar, title: 'Daily, Weekly & Monthly', desc: 'Three views built in.' },
-              { Icon: Brain, title: 'Completely Your Own', desc: 'Your habits, your way.' },
-              { Icon: BarChart2, title: 'See Your Progress', desc: 'Visual tracking at a glance.' },
-            ].map(({ Icon, title, desc }) => (
-              <div key={title} className="bg-white rounded-xl p-3 sm:p-5 border border-gray-100 shadow-sm flex flex-col gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0">
-                  <Icon className="h-4 w-4 text-white" />
+      <div className="bg-gray-50 py-14 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xs font-bold tracking-widest uppercase text-red-600 text-center mb-3 sm:hidden">What is Trackly?</p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-10 sm:gap-16">
+            {/* Left — text */}
+            <div className="sm:w-1/2 flex-shrink-0">
+              <p className="text-xs font-bold tracking-widest uppercase text-red-600 mb-3 hidden sm:block">What is Trackly?</p>
+              <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4">
+                Most people know what they should do. They just don't track it.
+              </h2>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Trackly is a web app that gives you a clear, simple system to track your habits daily, weekly, and monthly.
+                No spreadsheets. No paper. No app to download. Just open it in your browser and start.
+              </p>
+            </div>
+            {/* Right — feature rows */}
+            <div className="sm:w-1/2 flex flex-col gap-3">
+              {[
+                { Icon: Calendar, title: 'Daily, Weekly & Monthly views', desc: 'Three built-in views — check off today, review your week, see the full month.' },
+                { Icon: Brain, title: 'Completely your own', desc: 'You decide the habits. Add anything, remove anything. No fixed template.' },
+                { Icon: BarChart2, title: 'See your progress clearly', desc: 'Visual tracking that shows exactly where you are — no guessing.' },
+              ].map(({ Icon, title, desc }) => (
+                <div key={title} className="bg-white rounded-xl px-4 py-3.5 flex items-center gap-4 border border-gray-100 shadow-sm">
+                  <div className="w-9 h-9 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm leading-snug">{title}</p>
+                    <p className="text-gray-500 text-xs leading-relaxed mt-0.5">{desc}</p>
+                  </div>
                 </div>
-                <p className="font-bold text-gray-900 text-xs sm:text-sm leading-snug">{title}</p>
-                <p className="text-gray-500 text-[11px] sm:text-xs leading-relaxed hidden sm:block">{desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -294,22 +300,22 @@ export default function ProductDetail() {
       </div>
 
       {/* ── What's Inside ── */}
-      <div className="bg-gray-50 py-16 px-4 sm:px-6">
+      <div className="bg-gray-50 py-14 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-xs font-bold tracking-widest uppercase text-red-600 text-center mb-3">What's Inside</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-2">Built around how you actually live</h2>
-          <p className="text-gray-500 text-sm text-center mb-10 max-w-md mx-auto">
+          <p className="text-gray-500 text-sm text-center mb-8 max-w-md mx-auto">
             Daily, weekly, and monthly views — fully customisable to track whatever habits matter to you.
           </p>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
             {included.map(({ Icon, label, desc }) => (
-              <div key={label} className="bg-white rounded-xl p-3 sm:p-5 flex flex-col gap-2 sm:gap-3 border border-gray-100 shadow-sm">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gray-900 flex items-center justify-center flex-shrink-0">
-                  <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+              <div key={label} className="bg-white rounded-xl px-4 py-3.5 flex items-center gap-4 border border-gray-100 shadow-sm">
+                <div className="w-9 h-9 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0">
+                  <Icon className="h-4 w-4 text-white" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900 text-xs sm:text-sm leading-snug mb-0.5">{label}</p>
-                  <p className="text-gray-500 text-[11px] sm:text-xs leading-relaxed hidden sm:block">{desc}</p>
+                  <p className="font-semibold text-gray-900 text-sm leading-snug">{label}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed mt-0.5">{desc}</p>
                 </div>
               </div>
             ))}
