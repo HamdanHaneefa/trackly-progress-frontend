@@ -18,10 +18,9 @@ function useCountdown(targetSeconds: number) {
 }
 
 const images = [
-  { src: '/image.png', bg: '', label: '' },
-  { src: '', bg: 'from-emerald-800 to-emerald-950', label: 'Daily View' },
-  { src: '', bg: 'from-slate-700 to-slate-900', label: 'Weekly View' },
-  { src: '', bg: 'from-teal-700 to-teal-950', label: 'Monthly View' },
+  { src: 'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/product_banner-1.png', bg: '', label: '' },
+  { src: 'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/product_banner-2.png', bg: '', label: '' },
+  { src: 'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/product_banner_3.png', bg: '', label: '' },
 ];
 
 const faqs = [
@@ -196,9 +195,9 @@ export default function ProductDetail() {
             {/* CTA */}
             <a
               href={CHECKOUT_URL}
-              className="block w-full py-4 bg-gray-900 text-white font-bold text-base rounded-xl hover:bg-gray-800 active:scale-[0.98] transition-all text-center tracking-wide"
+              className="block w-full py-3.5 bg-gray-900 text-white font-semibold text-sm rounded-lg hover:bg-gray-800 active:scale-[0.99] transition-all text-center"
             >
-              Get Instant Access — $13.00
+              Get Instant Access
             </a>
 
 
@@ -244,18 +243,18 @@ export default function ProductDetail() {
             Trackly is a web app that gives you a clear, simple system to track your habits daily, weekly, and monthly.
             No spreadsheets. No paper. No app to download. Just open it in your browser and start.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 text-left">
             {[
-              { Icon: Calendar, title: 'Daily, Weekly & Monthly', desc: 'Three views built in — check off today, review your week, see the full month.' },
-              { Icon: Brain, title: 'Completely Your Own', desc: 'You decide the habits. Add anything, remove anything. No fixed template.' },
-              { Icon: BarChart2, title: 'See Your Progress', desc: 'Visual tracking that shows you exactly where you are — no guessing.' },
+              { Icon: Calendar, title: 'Daily, Weekly & Monthly', desc: 'Three views built in.' },
+              { Icon: Brain, title: 'Completely Your Own', desc: 'Your habits, your way.' },
+              { Icon: BarChart2, title: 'See Your Progress', desc: 'Visual tracking at a glance.' },
             ].map(({ Icon, title, desc }) => (
-              <div key={title} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
-                <div className="w-9 h-9 rounded-lg bg-gray-900 flex items-center justify-center mb-3">
+              <div key={title} className="bg-white rounded-xl p-3 sm:p-5 border border-gray-100 shadow-sm flex flex-col gap-2">
+                <div className="w-8 h-8 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0">
                   <Icon className="h-4 w-4 text-white" />
                 </div>
-                <p className="font-bold text-gray-900 text-sm mb-1">{title}</p>
-                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                <p className="font-bold text-gray-900 text-xs sm:text-sm leading-snug">{title}</p>
+                <p className="text-gray-500 text-[11px] sm:text-xs leading-relaxed hidden sm:block">{desc}</p>
               </div>
             ))}
           </div>
@@ -302,15 +301,15 @@ export default function ProductDetail() {
           <p className="text-gray-500 text-sm text-center mb-10 max-w-md mx-auto">
             Daily, weekly, and monthly views — fully customisable to track whatever habits matter to you.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-3">
             {included.map(({ Icon, label, desc }) => (
-              <div key={label} className="bg-white rounded-2xl p-5 flex flex-col gap-3 border border-gray-100 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center flex-shrink-0">
-                  <Icon className="h-5 w-5 text-white" />
+              <div key={label} className="bg-white rounded-xl p-3 sm:p-5 flex flex-col gap-2 sm:gap-3 border border-gray-100 shadow-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gray-900 flex items-center justify-center flex-shrink-0">
+                  <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900 text-sm mb-0.5">{label}</p>
-                  <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                  <p className="font-bold text-gray-900 text-xs sm:text-sm leading-snug mb-0.5">{label}</p>
+                  <p className="text-gray-500 text-[11px] sm:text-xs leading-relaxed hidden sm:block">{desc}</p>
                 </div>
               </div>
             ))}
@@ -401,9 +400,9 @@ export default function ProductDetail() {
         </p>
         <a
           href={CHECKOUT_URL}
-          className="inline-block px-10 py-4 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 active:scale-95 transition-all text-sm tracking-wide"
+          className="inline-block px-10 py-3.5 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 active:scale-[0.99] transition-all text-sm"
         >
-          Get Instant Access — $13.00
+          Get Instant Access
         </a>
         <p className="text-gray-600 text-xs mt-4 flex items-center justify-center gap-1.5">
           <Users className="h-3.5 w-3.5" />
