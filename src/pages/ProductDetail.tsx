@@ -78,6 +78,23 @@ const VIDEO_URL =
 const CHECKOUT_URL =
   'https://store.elamai.in/buy?s=1&qty%5Bw9Ko3%5D=1&cart_links%5B%5D=w9Ko3';
 
+function SkeletonImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="relative w-full h-full">
+      {!loaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 animate-pulse" />
+      )}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setLoaded(true)}
+        className={`${className ?? ''} transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </div>
+  );
+}
+
 export default function ProductDetail() {
   const [active, setActive] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -113,7 +130,7 @@ export default function ProductDetail() {
           {/* Left — Image Gallery */}
           <div className="lg:sticky lg:top-20">
             <div className="relative rounded-2xl overflow-hidden bg-gray-950 w-full" style={{ aspectRatio: '4/3' }}>
-              <img
+              <SkeletonImage
                 src={images[active].src}
                 alt="Trackly Habit Tracker"
                 className="w-full h-full object-contain"
@@ -129,7 +146,7 @@ export default function ProductDetail() {
                   aria-label={`View ${i + 1}`}
                 >
                   {img.src
-                    ? <img src={img.src} alt="" className="w-full h-full object-contain bg-gray-950" />
+                    ? <SkeletonImage src={img.src} alt="" className="w-full h-full object-contain bg-gray-950" />
                     : <div className={`w-full h-full bg-gradient-to-br ${img.bg} flex items-center justify-center`}>
                         <span className="text-white text-[9px] font-semibold text-center px-1 leading-tight">{img.label}</span>
                       </div>

@@ -17,6 +17,33 @@ function useCountdown(targetSeconds: number) {
   return { hours, minutes, seconds };
 }
 
+function ProductImage({ src, alt, badge }: { src: string; alt: string; badge?: string }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="relative bg-gray-200 aspect-square overflow-hidden">
+      {/* Skeleton shimmer shown until image loads */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
+      )}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+      {badge && (
+        <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
+          {badge}
+        </span>
+      )}
+      <span className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-gray-700 text-xs font-semibold px-3 py-1 rounded-full shadow border border-gray-200 whitespace-nowrap">
+        INSTANT DOWNLOAD
+      </span>
+    </div>
+  );
+}
+
 const products = [
   {
     id: 'habit-tracker',
@@ -30,7 +57,6 @@ const products = [
 
 export default function Product() {
   const { hours, minutes, seconds } = useCountdown(8 * 3600 + 28 * 60 + 37);
-
   const pad = (n: number) => String(n).padStart(2, '0');
 
   return (
@@ -67,29 +93,13 @@ export default function Product() {
               to={`/product/${product.id}`}
               className="group w-56 bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow"
             >
-              {/* Image */}
-              <div className="relative bg-gray-100 aspect-square overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                {product.badge && (
-                  <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
-                    {product.badge}
-                  </span>
-                )}
-                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-gray-700 text-xs font-semibold px-3 py-1 rounded-full shadow border border-gray-200 whitespace-nowrap">
-                  INSTANT DOWNLOAD
-                </span>
-              </div>
+              <ProductImage src={product.image} alt={product.title} badge={product.badge} />
 
               {/* Info */}
               <div className="p-4 text-center">
                 <h2 className="text-sm font-semibold text-gray-900 leading-snug mb-2">
                   {product.title}
                 </h2>
-
                 <p className="text-base font-bold text-gray-900">
                   ${product.price.toFixed(2)} {product.currency}
                 </p>
