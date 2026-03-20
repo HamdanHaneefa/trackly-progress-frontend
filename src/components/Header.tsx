@@ -3,7 +3,8 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const navLinks = [
-  { to: '/product', label: 'Habit Tracker' },
+  { to: '/', label: 'Home' },
+  { to: '/product/habit-tracker', label: 'Habit Tracker' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -36,7 +37,7 @@ export default function Header() {
 
           {/* Center: logo (absolute so it's truly centered) */}
           <Link
-            to="/product"
+            to="/"
             className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center leading-none select-none"
           >
             <span className="text-2xl font-black text-gray-900 tracking-tight flex items-center gap-1">

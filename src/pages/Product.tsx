@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Star } from 'lucide-react';
 
 function useCountdown(targetSeconds: number) {
   const [timeLeft, setTimeLeft] = useState(targetSeconds);
@@ -23,8 +22,6 @@ const products = [
     id: 'habit-tracker',
     title: 'Habit Tracker for Excel & Google Sheets',
     image: '/image.png',
-    rating: 5,
-    reviews: 286,
     price: 0,
     originalPrice: 2900,
     currency: 'INR',
@@ -64,11 +61,7 @@ export default function Product() {
 
       {/* Page Content */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 text-center mb-10">
-          Download Now 👇
-        </h1>
-
-        <div className="flex flex-wrap gap-6 justify-center">
+        <div className="flex flex-wrap gap-6 justify-start">
           {products.map((product) => (
             <Link
               key={product.id}
@@ -97,13 +90,6 @@ export default function Product() {
                 <h2 className="text-sm font-semibold text-gray-900 leading-snug mb-2">
                   {product.title}
                 </h2>
-
-                <div className="flex items-center justify-center gap-1 mb-2">
-                  {Array.from({ length: product.rating }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                  <span className="text-xs text-gray-500 ml-1">({product.reviews})</span>
-                </div>
 
                 <p className="text-base font-bold text-gray-900">
                   Rs. {product.price.toFixed(2)} {product.currency}
