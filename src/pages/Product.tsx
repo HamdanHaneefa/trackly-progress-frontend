@@ -21,16 +21,16 @@ function ProductImage({ src, alt, badge }: { src: string; alt: string; badge?: s
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative bg-gray-200 aspect-square overflow-hidden">
+    <div className="relative bg-gray-950 aspect-square overflow-hidden">
       {/* Skeleton shimmer shown until image loads */}
       {!loaded && (
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 animate-pulse" />
       )}
       <img
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-contain group-hover:scale-105 transition-all duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
       />
       {badge && (
         <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
@@ -48,7 +48,7 @@ const products = [
   {
     id: 'habit-tracker',
     title: 'Habit Tracker for Google Sheets',
-    image: '/image.png',
+    image: 'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/product_banner-1.png',
     price: 13,
     currency: 'USD',
     badge: 'Sale',

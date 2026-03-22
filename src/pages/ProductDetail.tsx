@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   Star, Zap, Target, ChevronDown, CheckCircle,
   Smartphone, RefreshCw, Mail, AlertCircle,
-  BarChart2, Brain, Calendar, ShieldCheck, Clock, Users
+  BarChart2, Brain, Calendar, ShieldCheck, Clock, Users, Eye
 } from 'lucide-react';
 
 function useCountdown(targetSeconds: number) {
@@ -44,22 +44,28 @@ const faqs = [
 
 const testimonials = [
   {
-    name: 'Priya S.',
-    role: 'Fitness Coach',
+    name: 'Daniel R.',
+    role: 'Verified',
     rating: 5,
-    text: "I just wanted a clear system that shows me what I'm doing. This does exactly that — nothing more, nothing less.",
+    text: "I've tested so many different ways to build better habits, but nothing really worked until this. It's simple, clean, and actually makes me want to check it daily. After a couple of weeks, I can already see real progress.",
   },
   {
-    name: 'Arjun M.',
-    role: 'Software Engineer',
-    rating: 5,
-    text: "I've stuck with this longer than any app I've tried. It doesn't overwhelm me or guilt me for missing a day.",
+    name: 'Michael T.',
+    role: 'Verified',
+    rating: 4,
+    text: "Love the daily layout. It keeps everything clear and helps me stop making excuses. I always know what I should focus on each day.",
   },
   {
-    name: 'Neha R.',
-    role: 'Student',
+    name: 'Ryan K.',
+    role: 'Verified',
     rating: 5,
-    text: "Makes tracking my week so much simpler and actually enjoyable. Best purchase I've made in a while.",
+    text: "Really well organized inside. It keeps me consistent without feeling like a task I have to do.",
+  },
+  {
+    name: 'Sophia L.',
+    role: 'Verified',
+    rating: 5,
+    text: "Helps me stay accountable every single day. I've completely reset my routine and finally feel consistent again.",
   },
 ];
 
@@ -72,11 +78,20 @@ const included = [
   { Icon: Smartphone, label: 'Works Everywhere', desc: 'Phone, tablet, desktop — any browser, any time' },
 ];
 
-const VIDEO_URL =
-  'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/product-1-video.mp4';
+const MEDIA_URLS = [
+  'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/trackly_post1.png',
+  'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/trackly_post1.png',
+  'https://kbheyllkkutfelfahryf.supabase.co/storage/v1/object/public/Videos/trackly_post1.png',
+];
+
+function isImage(url: string) {
+  return /\.(png|jpe?g|gif|webp|avif|svg)(\?.*)?$/i.test(url);
+}
 
 const CHECKOUT_URL =
   'https://checkout.elamai.in/buy?s=1&cart_links%5B%5D=w9Ko3&qty%5Bw9Ko3%5D=1';
+
+const PREVIEW_URL = 'https://preview-trackly.elamai.in';
 
 function SkeletonImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
   const [loaded, setLoaded] = useState(false);
@@ -214,6 +229,16 @@ export default function ProductDetail() {
               Get Instant Access
             </a>
 
+            {/* Preview */}
+            <a
+              href={PREVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full py-3 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-300 active:scale-[0.99] transition-all"
+            >
+              <Eye className="h-4 w-4 text-gray-500 flex-shrink-0" />
+              Try Live Preview
+            </a>
 
             {/* Accordions */}
             <div className="border border-gray-200 rounded-xl overflow-hidden divide-y divide-gray-100">
@@ -292,24 +317,33 @@ export default function ProductDetail() {
           <p className="text-gray-500 text-xs text-center mb-6 max-w-xs mx-auto">A quick look at how Trackly works day to day.</p>
           {/* Mobile: 2 columns, compact. Desktop: 3 columns */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[VIDEO_URL, VIDEO_URL, VIDEO_URL].map((url, i) => (
+            {MEDIA_URLS.map((url, i) => (
               <div
                 key={i}
                 className={`rounded-xl overflow-hidden bg-gray-900 select-none ${i === 2 ? 'hidden sm:block' : ''}`}
                 style={{ aspectRatio: '9/14' }}
                 onContextMenu={(e) => e.preventDefault()}
               >
-                <video
-                  src={url}
-                  className="w-full h-full object-cover pointer-events-none"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  disablePictureInPicture
-                  controlsList="nodownload nofullscreen noremoteplayback"
-                />
+                {isImage(url) ? (
+                  <img
+                    src={url}
+                    alt={`Preview ${i + 1}`}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                ) : (
+                  <video
+                    src={url}
+                    className="w-full h-full object-cover pointer-events-none"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    disablePictureInPicture
+                    controlsList="nodownload nofullscreen noremoteplayback"
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -347,7 +381,7 @@ export default function ProductDetail() {
         <div className="max-w-4xl mx-auto">
           <p className="text-xs font-bold tracking-widest uppercase text-red-600 text-center mb-3">Reviews</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10">What people are saying</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {testimonials.map(({ name, role, rating, text }) => (
               <div key={name} className="bg-gray-50 rounded-2xl border border-gray-100 p-5">
                 <div className="flex gap-0.5 mb-3">
@@ -362,7 +396,9 @@ export default function ProductDetail() {
                   </div>
                   <div>
                     <p className="text-sm font-bold text-gray-900 leading-none">{name}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{role}</p>
+                    <p className="text-xs text-green-500 mt-0.5 flex items-center gap-1">
+                      <CheckCircle className="h-3 w-3" /> {role}
+                    </p>
                   </div>
                 </div>
               </div>
